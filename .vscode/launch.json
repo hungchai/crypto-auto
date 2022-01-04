@@ -1,0 +1,14 @@
+{
+	"configurations": [
+		{
+			"type": "java",
+			"name": "Spring Boot-CryptoautoApplicationTests<cryptoauto>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"console": "internalConsole",
+			"mainClass": "com.cryptoauto.CryptoautoApplicationTests",
+			"projectName": "vscode",
+			"args": "--spring.profiles.active=dev"
+		}
+	]
+}

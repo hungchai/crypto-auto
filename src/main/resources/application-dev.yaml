@@ -1,0 +1,13 @@
+server:
+    port: 8964
+spring: 
+    devtools:
+        remote:
+            debug: 
+                local-port: 50442
+        restart: 
+            enabled: true
+    thymeleaf:
+        cache: false
+
+    

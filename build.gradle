@@ -1,0 +1,56 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.0-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  	id 'io.freefair.lombok' version '6.3.0'
+	id 'java'
+}
+
+group = 'com.cryptoauto'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	dev
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	implementation platform('io.projectreactor:reactor-bom:2020.0.14')
+    implementation 'io.projectreactor:reactor-core' 
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation group: 'io.projectreactor.addons', name: 'reactor-adapter', version: '3.4.6'
+
+
+	implementation 'org.knowm.xchange:xchange-core:5.0.12'
+	implementation 'org.knowm.xchange:xchange-binance:5.0.12'
+	implementation 'org.knowm.xchange:xchange-stream-binance:5.0.12'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+bootRun {
+  classpath = sourceSets.main.runtimeClasspath + configurations.dev
+//  args = ["--spring.profiles.active=" + findProperty('profiles') ?: 'dev']
+  debugOptions {
+        enabled = false
+        port = 50442
+        server = true
+        suspend = true
+    }
+}
+compileJava.dependsOn(processResources)
