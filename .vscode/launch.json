@@ -2,12 +2,12 @@
 	"configurations": [
 		{
 			"type": "java",
-			"name": "Spring Boot-CryptoautoApplicationTests<cryptoauto>",
+			"name": "Launch CryptoautoApplication",
 			"request": "launch",
 			"cwd": "${workspaceFolder}",
 			"console": "internalConsole",
-			"mainClass": "com.cryptoauto.CryptoautoApplicationTests",
-			"projectName": "vscode",
+			"mainClass": "com.cryptoauto.CryptoautoApplication",
+			"projectName": "crypto-auto",
 			"args": "--spring.profiles.active=dev"
 		}
 	]
