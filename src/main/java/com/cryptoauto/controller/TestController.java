@@ -13,6 +13,7 @@ import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trade;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @AllArgsConstructor
+@ComponentScan(basePackages = "com.cryptoauto.configuration")
 public class TestController {
     final private Map<String, XchangeStreamConnectorConfiguration> xchangeStreamConnectorMap;
 

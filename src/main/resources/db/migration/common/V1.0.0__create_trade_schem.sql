@@ -9,7 +9,9 @@ create table trade
     price numeric(36,16),
     instrument varchar(255),
     trade_timestamp timestamp,
-	provider varchar(255)
+	provider varchar(255),
+    update_date timestamp,
+    create_date timestamp default current_timestamp
 );
 
 SELECT create_hypertable('trade', 'trade_timestamp');
