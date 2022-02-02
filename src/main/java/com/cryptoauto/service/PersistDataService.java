@@ -11,19 +11,22 @@ import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
+import java.time.Instant;
+
 @Service
 @AllArgsConstructor
 @Slf4j
 public class PersistDataService {
 	final TradeRepository tradeRepository;
 
-	public Flux<com.cryptoauto.model.Trade> persistTradeData(Flux<Trade> tradeFlux) {
+	public Flux<com.cryptoauto.model.Trade> persistTradeData(String provider, Flux<Trade> tradeFlux) {
 		return tradeFlux
 				.onBackpressureBuffer()
 				.subscribeOn(Schedulers.boundedElastic())
 				.log()
 				.concatMap(xChangetrade -> {
-					com.cryptoauto.model.Trade trade = toTradeModel(xChangetrade);
+					com.cryptoauto.model.Trade trade = toTradeModel(xChangetrade, provider);
+					log.info(trade.toString());
 					tradeRepository.save(trade);
 					return Flux.just(trade);
 				})
@@ -34,7 +37,7 @@ public class PersistDataService {
 				});
 	}
 
-	public com.cryptoauto.model.Trade toTradeModel(Trade trade) {
+	public com.cryptoauto.model.Trade toTradeModel(Trade trade, String provider) {
 		TradeBuilder tb = com.cryptoauto.model.Trade.builder();
 
 		tb.instrument(trade.getInstrument().toString())
@@ -44,6 +47,7 @@ public class PersistDataService {
 				.originalAmount(trade.getOriginalAmount())
 				.price(trade.getPrice())
 				.type(trade.getType().toString())
+				.provider(provider)
 				.tradeTimestamp(trade.getTimestamp().toInstant());
 
 		return tb.build();

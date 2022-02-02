@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,10 +21,11 @@ import lombok.NonNull;
 @Table(name = "trade")
 @Data // Lombok: adds getters and setters
 @Builder
+@AllArgsConstructor
 public class Trade {
 	
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 	@NonNull
@@ -47,10 +49,11 @@ public class Trade {
 	private Instant tradeTimestamp;
 
 	@NonNull
-	@CreationTimestamp
-	private Instant createTimestamp;
+	private String provider;
 
-	@NonNull
+	@CreationTimestamp
+	private Instant createDate;
+
 	@UpdateTimestamp
-	private Instant updateTimestamp;
+	private Instant updateDate;
 }

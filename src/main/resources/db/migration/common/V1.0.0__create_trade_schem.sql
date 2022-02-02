@@ -13,6 +13,11 @@ create table trade
     update_date timestamp,
     create_date timestamp default current_timestamp
 );
+CREATE INDEX idx_trade_provider
+    ON trade (provider);
+
+CREATE INDEX idx__trade_instrument
+    ON trade (instrument);
 
 SELECT create_hypertable('trade', 'trade_timestamp');
 

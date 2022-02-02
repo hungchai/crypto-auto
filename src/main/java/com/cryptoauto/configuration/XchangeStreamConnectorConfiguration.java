@@ -21,24 +21,31 @@ import reactor.adapter.rxjava.RxJava2Adapter;
 import reactor.core.publisher.Flux;
 
 
-public class XchangeStreamConnectorConfiguration {
+public abstract class XchangeStreamConnectorConfiguration {
     @Getter
-    StreamingExchange streamExchange;
+    protected StreamingExchange streamExchange;
 
     @Getter
-    Exchange apiExchange;
-
-    Class<? extends StreamingExchange> exchangeClass;
+    protected Exchange apiExchange;
 
     @Getter
-    Map<Instrument, Flux<Trade>> tradePairFluxMap = new HashMap<>();
-    @Getter
-    Map<Instrument, Flux<OrderBook>> orderBookFluxMap = new HashMap<>();
-    @Getter
-    Map<Instrument, Flux<Ticker>> tickerPairFluxMap = new HashMap<>();
+    protected Class<? extends StreamingExchange> exchangeClass;
 
-    XchangeStreamConnectorConfiguration(Class<? extends StreamingExchange> exchangeClass) {
+    @Getter
+    protected String providerName;
+
+    @Getter
+    protected Map<Instrument, Flux<Trade>> tradePairFluxMap = new HashMap<>();
+
+    @Getter
+    protected Map<Instrument, Flux<OrderBook>> orderBookFluxMap = new HashMap<>();
+
+    @Getter
+    protected Map<Instrument, Flux<Ticker>> tickerPairFluxMap = new HashMap<>();
+
+    XchangeStreamConnectorConfiguration(Class<? extends StreamingExchange> exchangeClass, String providerName) {
         this.exchangeClass = exchangeClass;
+        this.providerName = providerName;
         streamExchange = StreamingExchangeFactory.INSTANCE.createExchange(exchangeClass);
         apiExchange = ExchangeFactory.INSTANCE.createExchange(exchangeClass);
     }

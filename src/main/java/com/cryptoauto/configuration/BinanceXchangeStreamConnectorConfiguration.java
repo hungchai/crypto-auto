@@ -30,7 +30,7 @@ public class BinanceXchangeStreamConnectorConfiguration extends XchangeStreamCon
     final TimedSemaphore semaphore = new TimedSemaphore(2, TimeUnit.SECONDS, 1);
 
     BinanceXchangeStreamConnectorConfiguration() {
-        super(BinanceStreamingExchange.class);
+        super(BinanceStreamingExchange.class, "Binance");
 
         // First, we need to subscribe to at least one currency pair at connection time
         // Note: at connection time, the live subscription is disabled
