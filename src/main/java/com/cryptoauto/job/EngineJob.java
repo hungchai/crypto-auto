@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
-import reactor.util.function.Tuple2;
 
 @Component
 @ComponentScan(basePackages = "com.cryptoauto.configuration")

@@ -25,6 +25,7 @@ public class BinanceXchangeStreamConnectorConfiguration extends XchangeStreamCon
             new CurrencyPair("ALGO", "USDT"),
             new CurrencyPair("UNI", "USDT"),
             new CurrencyPair("FTM", "USDT"),
+            new CurrencyPair("OAX", "BTC"),
             new CurrencyPair("SAND", "USDT"));
 
     final TimedSemaphore semaphore = new TimedSemaphore(2, TimeUnit.SECONDS, 1);

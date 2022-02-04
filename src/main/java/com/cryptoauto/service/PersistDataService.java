@@ -23,14 +23,12 @@ public class PersistDataService {
 		return tradeFlux
 				.onBackpressureBuffer()
 				.subscribeOn(Schedulers.boundedElastic())
-				.log()
-				.concatMap(xChangetrade -> {
+				.flatMap(xChangetrade -> {
 					com.cryptoauto.model.Trade trade = toTradeModel(xChangetrade, provider);
-					log.info(trade.toString());
 					tradeRepository.save(trade);
+					log.info(trade.toString());
 					return Flux.just(trade);
 				})
-				.log()
 				.onErrorResume(t -> {
 					log.error("Cannot save to db, exception:" ,t);
 					return Flux.empty();
