@@ -25,4 +25,5 @@ hs_err_pid*
 bin
 build
 .idea
-src/.DS_Store
+.vscode
+*/.DS_Store
