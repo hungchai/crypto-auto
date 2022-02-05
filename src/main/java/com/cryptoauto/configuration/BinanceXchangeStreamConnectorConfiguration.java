@@ -1,10 +1,7 @@
 package com.cryptoauto.configuration;
 
-import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.concurrent.TimedSemaphore;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -16,32 +13,25 @@ import info.bitrich.xchangestream.core.ProductSubscription;
 
 @Configuration("binanceStreamConnector")
 public class BinanceXchangeStreamConnectorConfiguration extends XchangeStreamConnectorConfiguration {
-     Set<Instrument> currencyPairs = Set.of(
-         new CurrencyPair("BTC", "USDT"), 
-         new CurrencyPair("GALA", "USDT"), 
-         new CurrencyPair("ETH", "USDT"), 
-         new CurrencyPair("BCH", "USDT"), 
-         new CurrencyPair("ATOM", "USDT"), 
-         new CurrencyPair("TRX", "USDT"), 
-         new CurrencyPair("BNB", "USDT"), 
-         new CurrencyPair("SHIB", "USDT"), 
-         new CurrencyPair("ALGO", "USDT"), 
-         new CurrencyPair("UNI", "USDT"), 
-         new CurrencyPair("FTM", "USDT"), 
-         new CurrencyPair("SAND", "USDT"));
+    Set<Instrument> currencyPairs = Set.of(
+            new CurrencyPair("BTC", "USDT"),
+            new CurrencyPair("GALA", "USDT"),
+            new CurrencyPair("ETH", "USDT"),
+            new CurrencyPair("BCH", "USDT"),
+            new CurrencyPair("ATOM", "USDT"),
+            new CurrencyPair("TRX", "USDT"),
+            new CurrencyPair("BNB", "USDT"),
+            new CurrencyPair("SHIB", "USDT"),
+            new CurrencyPair("ALGO", "USDT"),
+            new CurrencyPair("UNI", "USDT"),
+            new CurrencyPair("FTM", "USDT"),
+            new CurrencyPair("OAX", "BTC"),
+            new CurrencyPair("SAND", "USDT"));
 
     final TimedSemaphore semaphore = new TimedSemaphore(2, TimeUnit.SECONDS, 1);
 
     BinanceXchangeStreamConnectorConfiguration() {
-        super(BinanceStreamingExchange.class);
-    }
-
-    @PostConstruct
-    void postConstruct() throws IOException {
-        // First, we need to subscribe to at least one currency pair at connection time
-        // Note: at connection time, the live subscription is disabled
-        // List<Instrument> instrumentList = super.getExchangeInstruments();
-        // currencyPairs = instrumentList.stream().collect(Collectors.toSet());
+        super(BinanceStreamingExchange.class, "Binance");
 
         ProductSubscription subscription = ProductSubscription.create()
                 .addTrades(CurrencyPair.BTC_USDT)
@@ -61,5 +51,4 @@ public class BinanceXchangeStreamConnectorConfiguration extends XchangeStreamCon
             }
         });
     }
-
 }

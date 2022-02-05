@@ -1,13 +1,29 @@
 server:
-    port: 8964
-spring: 
-    devtools:
-        remote:
-            debug: 
-                local-port: 50442
-        restart: 
-            enabled: true
-    thymeleaf:
-        cache: false
+  port: 8964
+spring:
+  devtools:
+    remote:
+      debug:
+        local-port: 50442
+    restart:
+      enabled: true
+  thymeleaf:
+    cache: false
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  
+    hibernate:
+      ddl-auto: none
+  datasource:
+    hikari:
+      connectionTimeout: 30000
+      maximumPoolSize: 5
+    url: jdbc:postgresql://localhost:5432/crypto_auto
+    username: crypto_auto_admin
+    password: pass1234
 
-    
+flyway:
+  user: crypto_auto_admin
+  password: pass1234
+  schemas: public
+  url: jdbc:postgresql://localhost:5432/crypto_auto
+  locations: filesystem:db/migration
