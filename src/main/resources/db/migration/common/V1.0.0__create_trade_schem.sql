@@ -8,10 +8,10 @@ create table trade
     original_amount numeric(36,16),
     price numeric(36,16),
     instrument varchar(255),
-    trade_timestamp timestamp,
+    trade_timestamp timestamptz,
 	provider varchar(255),
-    update_date timestamp,
-    create_date timestamp default current_timestamp
+    update_date timestamptz,
+    create_date timestamptz default current_timestamp
 );
 CREATE INDEX idx_trade_provider
     ON trade (provider);
