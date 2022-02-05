@@ -1,13 +1,23 @@
 version: "3.9" # optional since v1.27.0
 services:
-  timescabledb:
-    image: timescale/timescaledb:latest-pg14
+  #  timescabledb:
+  #    image: timescale/timescaledb:latest-pg14
+  #    ports:
+  #      - "5432:5432"
+  #    volumes:
+  #      - ./timescale/data:/var/lib/postgresql/data
+  #    environment:
+  #      - POSTGRES_PASSWORD=pass1234 # superuser :postgres
+
+  timescabledb-ha:
+    image: timescale/timescaledb-ha:pg14-latest
     ports:
       - "5432:5432"
     volumes:
       - ./timescale/data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=pass1234 # superuser :postgres
+
   redis:
     image: redis
     ports:

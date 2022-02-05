@@ -33,11 +33,6 @@ public class BinanceXchangeStreamConnectorConfiguration extends XchangeStreamCon
     BinanceXchangeStreamConnectorConfiguration() {
         super(BinanceStreamingExchange.class, "Binance");
 
-        // First, we need to subscribe to at least one currency pair at connection time
-        // Note: at connection time, the live subscription is disabled
-        // List<Instrument> instrumentList = super.getExchangeInstruments();
-        // currencyPairs = instrumentList.stream().collect(Collectors.toSet());
-
         ProductSubscription subscription = ProductSubscription.create()
                 .addTrades(CurrencyPair.BTC_USDT)
                 .addOrderbook(CurrencyPair.BTC_USDT).build();
