@@ -2,26 +2,20 @@ package com.cryptoauto.model;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
 
 @Entity
 @Table(name = "trade")
 @Data // Lombok: adds getters and setters
 @Builder
 @AllArgsConstructor
+@ToString
 public class Trade {
 	
 	@Id

@@ -5,8 +5,10 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 
 import com.cryptoauto.configuration.XchangeStreamConnectorConfiguration;
+import com.cryptoauto.configuration.XchangeStreamRegisterConfiguration;
 import com.cryptoauto.service.PersistDataService;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
@@ -16,15 +18,17 @@ import reactor.core.publisher.Flux;
 
 @Component
 @ComponentScan(basePackages = "com.cryptoauto.configuration")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class EngineJob {
 
-    final private Map<String, XchangeStreamConnectorConfiguration> xchangeStreamConnectorMap;
+    private Map<String, XchangeStreamConnectorConfiguration> xchangeStreamConnectorMap;
+    final private XchangeStreamRegisterConfiguration xchangeStreamRegisterConfiguration;
     final private PersistDataService persistDataService;
 
     @PostConstruct
     private void run() {
+        xchangeStreamConnectorMap = xchangeStreamRegisterConfiguration.getRegisteredConnector();
         Flux.fromIterable(xchangeStreamConnectorMap.keySet())
                 .map(xchangeStreamConnectorMap::get)
                 .flatMap(t -> {
@@ -36,7 +40,7 @@ public class EngineJob {
                     var entrySet = e.getT2();
                     return Flux.fromIterable(entrySet)
                             .flatMap(entry -> {
-                                log.info("Instrument {}", entry.getKey().toString());
+                                log.info("exchangeProvider {}, Instrument {}", exchangeProvider, entry.getKey().toString());
                                 return persistDataService.persistTradeData(exchangeProvider, entry.getValue());
                             });
                 })
