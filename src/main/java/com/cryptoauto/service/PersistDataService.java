@@ -13,6 +13,7 @@ import reactor.core.scheduler.Schedulers;
 
 import java.time.Instant;
 import java.time.ZoneId;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class PersistDataService {
 				.flatMap(xChangetrade -> {
 					com.cryptoauto.model.Trade trade = toTradeModel(xChangetrade, provider);
 					tradeRepository.save(trade);
-					log.info(trade.toString());
+//					log.info(trade.toString());
 					return Flux.just(trade);
 				})
 				.onErrorResume(t -> {
@@ -42,7 +43,7 @@ public class PersistDataService {
 		tb.instrument(trade.getInstrument().toString())
 				.makerOrderId(trade.getMakerOrderId())
 				.takerOrderId(trade.getTakerOrderId())
-				.tradeId(trade.getId())
+				.tradeId(trade.getId() == null ? UUID.randomUUID().toString(): trade.getId())
 				.originalAmount(trade.getOriginalAmount())
 				.price(trade.getPrice())
 				.type(trade.getType().toString())

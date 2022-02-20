@@ -54,6 +54,14 @@ dependencies {
 	implementation 'org.knowm.xchange:xchange-ftx:5.0.13'
 	implementation 'org.knowm.xchange:xchange-stream-ftx:5.0.13'
 
+	implementation 'org.knowm.xchange:xchange-gateio:5.0.13'
+	implementation 'org.knowm.xchange:xchange-stream-gateio:5.0.13'
+
+	implementation 'org.knowm.xchange:xchange-kraken:5.0.13'
+	implementation 'org.knowm.xchange:xchange-stream-kraken:5.0.13'
+
+	implementation 'org.knowm.xchange:xchange-huobi:5.0.13'
+	implementation 'org.knowm.xchange:xchange-stream-huobi:5.0.13'
 }
 
 test {

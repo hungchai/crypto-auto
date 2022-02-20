@@ -4,20 +4,27 @@ import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
 import info.bitrich.xchangestream.coinbasepro.CoinbaseProStreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.ftx.FtxStreamingExchange;
+import info.bitrich.xchangestream.huobi.HuobiStreamingExchange;
+import info.bitrich.xchangestream.kraken.KrakenStreamingExchange;
 import lombok.Getter;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Flux;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 @Configuration()
 @Getter
 public class XchangeStreamRegisterConfiguration {
     Map<String, Class<? extends StreamingExchange>> streamClassMap = Map.of(
-            "Binance",BinanceStreamingExchange.class,
-            "Ftx",FtxStreamingExchange.class,
-            "Coinbasepro", CoinbaseProStreamingExchange.class
+            "Binance", BinanceStreamingExchange.class,
+            "Ftx", FtxStreamingExchange.class,
+            "Coinbasepro", CoinbaseProStreamingExchange.class,
+            "Kraken", KrakenStreamingExchange.class,
+            "Huobi", HuobiStreamingExchange.class
             );
 
     HashMap<String, XchangeStreamConnectorConfiguration> registeredConnector = new HashMap<>();

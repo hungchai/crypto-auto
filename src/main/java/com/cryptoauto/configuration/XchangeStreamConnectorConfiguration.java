@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observable;
+import lombok.extern.slf4j.Slf4j;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -20,7 +22,7 @@ import lombok.Getter;
 import reactor.adapter.rxjava.RxJava2Adapter;
 import reactor.core.publisher.Flux;
 
-
+@Slf4j
 public abstract class XchangeStreamConnectorConfiguration {
     @Getter
     protected StreamingExchange streamExchange;
@@ -57,24 +59,30 @@ public abstract class XchangeStreamConnectorConfiguration {
 
     Flux<OrderBook> getStreamingMarketOrderbookService(Instrument currencyPair) {
         return RxJava2Adapter.observableToFlux(streamExchange.getStreamingMarketDataService().getOrderBook(currencyPair),
-                BackpressureStrategy.BUFFER);
+                BackpressureStrategy.BUFFER).onErrorResume(t -> {
+            log.error("getStreamingMarketOrderbookService {}", currencyPair.toString(), t);
+            return Flux.empty();
+        });
     }
 
     Flux<Ticker> getStreamingMarketTickerService(Instrument currencyPair) {
         return RxJava2Adapter.observableToFlux(streamExchange.getStreamingMarketDataService().getTicker(currencyPair),
-                BackpressureStrategy.BUFFER);
+                BackpressureStrategy.BUFFER).onErrorResume(t -> {
+            log.error("getStreamingMarketTickerService {}", currencyPair.toString(), t);
+            return Flux.empty();
+        });
     }
 
     public OrderBook getOrderDepth(Instrument currencyPair) throws IOException {
-        return apiExchange.getMarketDataService().getOrderBook((Instrument)currencyPair);
+        return apiExchange.getMarketDataService().getOrderBook((Instrument) currencyPair);
     }
 
     public Trades getTrades(Instrument currencyPair) throws IOException {
-        return apiExchange.getMarketDataService().getTrades((Instrument)currencyPair);
+        return apiExchange.getMarketDataService().getTrades((Instrument) currencyPair);
     }
 
     public Ticker getTicker(Instrument currencyPair) throws IOException {
-        return apiExchange.getMarketDataService().getTicker((Instrument)currencyPair);
+        return apiExchange.getMarketDataService().getTicker((Instrument) currencyPair);
     }
 
     public List<Instrument> getExchangeInstruments() throws IOException {
