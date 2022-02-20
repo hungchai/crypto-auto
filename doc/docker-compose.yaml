@@ -14,7 +14,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./timescale/data:/var/lib/postgresql/data
+      - ./timescale/data:/home/postgres/pgdata/data
     environment:
       - POSTGRES_PASSWORD=pass1234 # superuser :postgres
 
