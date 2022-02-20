@@ -1,6 +1,6 @@
 # crypto-auto
 Prerequisite:
-- Timescable db (pg-14) with `timescabledb-toolskit`
+- Timescable db (pg-14) with `timescabledb-toolskit` (Optional)
 - Java 11
 - update the db details to 
   - `spring.datasource.url`
