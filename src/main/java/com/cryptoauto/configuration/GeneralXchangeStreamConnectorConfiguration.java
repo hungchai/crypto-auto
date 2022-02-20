@@ -1,14 +1,13 @@
 package com.cryptoauto.configuration;
 
-import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
 import info.bitrich.xchangestream.core.ProductSubscription;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.concurrent.TimedSemaphore;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.instrument.Instrument;
+import reactor.core.publisher.Flux;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -44,11 +43,15 @@ public class GeneralXchangeStreamConnectorConfiguration extends XchangeStreamCon
             try {
                 semaphore.acquire();
 //                ((BinanceStreamingExchange) streamExchange).enableLiveSubscription();
-                tradePairFluxMap.computeIfAbsent(currencyPair, s -> getStreamingMarketTradeService(currencyPair));
-                orderBookFluxMap.computeIfAbsent(currencyPair, s -> getStreamingMarketOrderbookService(currencyPair));
-                tickerPairFluxMap.computeIfAbsent(currencyPair, s -> getStreamingMarketTickerService(currencyPair));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                Flux trade = getStreamingMarketTradeService(currencyPair);
+                Flux order = getStreamingMarketOrderbookService(currencyPair);
+                Flux ticket = getStreamingMarketTickerService(currencyPair);
+
+                tradePairFluxMap.computeIfAbsent(currencyPair, s -> trade);
+                orderBookFluxMap.computeIfAbsent(currencyPair, s -> order);
+                tickerPairFluxMap.computeIfAbsent(currencyPair, s -> ticket);
+            } catch (Exception e) {
+                log.warn("cannot register ", e);
             }
         });
     }

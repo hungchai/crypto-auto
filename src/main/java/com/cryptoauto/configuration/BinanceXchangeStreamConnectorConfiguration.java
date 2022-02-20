@@ -59,7 +59,7 @@ public class BinanceXchangeStreamConnectorConfiguration extends XchangeStreamCon
                 tradePairFluxMap.computeIfAbsent(currencyPair, s -> getStreamingMarketTradeService(currencyPair));
                 orderBookFluxMap.computeIfAbsent(currencyPair, s -> getStreamingMarketOrderbookService(currencyPair));
                 tickerPairFluxMap.computeIfAbsent(currencyPair, s -> getStreamingMarketTickerService(currencyPair));
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
