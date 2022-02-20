@@ -10,7 +10,11 @@ spring:
   thymeleaf:
     cache: false
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect  
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: none
   datasource:

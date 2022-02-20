@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
 import java.time.Instant;
+import java.time.ZoneId;
 
 @Service
 @AllArgsConstructor
@@ -46,8 +47,9 @@ public class PersistDataService {
 				.price(trade.getPrice())
 				.type(trade.getType().toString())
 				.provider(provider)
-				.tradeTimestamp(trade.getTimestamp().toInstant());
-
+				.tradeTimestamp(trade.getTimestamp().toInstant())
+//				.testDattestDatee(trade.getTimestamp().toInstant().atZone(ZoneId.of("UTC")).toLocalDateTime());
+				;
 		return tb.build();
 	}
 }

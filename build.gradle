@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.0-SNAPSHOT'
+	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
   	id 'io.freefair.lombok' version '6.3.0'
 	id 'java'
@@ -33,9 +33,9 @@ dependencies {
 	implementation group: 'io.projectreactor.addons', name: 'reactor-adapter', version: '3.4.6'
 	implementation 'org.ta4j:ta4j-core:0.14'
 	implementation 'org.knowm.xchange:xchange-core:5.0.12'
-	implementation 'org.knowm.xchange:xchange-binance:5.0.12'
-	implementation 'org.knowm.xchange:xchange-stream-binance:5.0.12'
-
+//	implementation 'org.knowm.xchange:xchange-stream-core:5.0.13'
+//	implementation 'org.knowm.xchange:xchange-stream-service-netty:5.0.13'
+//
 	runtimeOnly 'org.flywaydb:flyway-gradle-plugin:8.4.1'	
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
@@ -43,6 +43,16 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.h2database:h2:2.0.206'
+
+	//xchange providers
+	implementation 'org.knowm.xchange:xchange-binance:5.0.12'
+	implementation 'org.knowm.xchange:xchange-stream-binance:5.0.12'
+
+	implementation 'org.knowm.xchange:xchange-coinbasepro:5.0.13'
+	implementation 'org.knowm.xchange:xchange-stream-coinbasepro:5.0.13'
+
+	implementation 'org.knowm.xchange:xchange-ftx:5.0.13'
+	implementation 'org.knowm.xchange:xchange-stream-ftx:5.0.13'
 
 }
 
