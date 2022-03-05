@@ -27,3 +27,6 @@ build
 .idea
 .vscode
 */.DS_Store
+/doc/grafana/
+/doc/redis/
+/doc/timescale/
