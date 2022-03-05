@@ -1,0 +1,7 @@
+psql -h localhost -U postgres
+
+create database crypto_auto;
+
+create user crypto_auto_admin with encrypted password 'pass1234';
+
+grant all privileges on database crypto_auto to crypto_auto_admin;
