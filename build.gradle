@@ -72,9 +72,11 @@ test {
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
 }
+
+def profiles = 'dev'
+
 bootRun {
-  classpath = sourceSets.main.runtimeClasspath + configurations.dev
-//  args = ["--spring.profiles.active=" + findProperty('profiles') ?: 'dev']
+  args = ["--spring.profiles.active=" + findProperty('profiles') ?: 'dev']
   debugOptions {
         enabled = false
         port = 50442
@@ -82,6 +84,7 @@ bootRun {
         suspend = true
     }
 }
+
 compileJava.dependsOn(processResources)
 
 ext['log4j2.version'] = '2.17.1'
