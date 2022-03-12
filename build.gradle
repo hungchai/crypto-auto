@@ -62,6 +62,15 @@ dependencies {
 
 	implementation 'org.knowm.xchange:xchange-huobi:5.0.13'
 	implementation 'org.knowm.xchange:xchange-stream-huobi:5.0.13'
+
+	implementation 'org.knowm.xchange:xchange-bitstamp:5.0.13'
+	implementation 'org.knowm.xchange:xchange-stream-bitstamp:5.0.13'
+
+	implementation 'org.knowm.xchange:xchange-okcoin:5.0.13'
+	implementation 'org.knowm.xchange:xchange-stream-okcoin:5.0.13'
+
+	implementation 'org.knowm.xchange:xchange-gemini:5.0.13'
+	implementation 'org.knowm.xchange:xchange-stream-gemini:5.0.13'
 }
 
 test {

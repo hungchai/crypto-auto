@@ -1,9 +1,11 @@
 package com.cryptoauto.configuration;
 
 import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
+import info.bitrich.xchangestream.bitstamp.v2.BitstampStreamingExchange;
 import info.bitrich.xchangestream.coinbasepro.CoinbaseProStreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.ftx.FtxStreamingExchange;
+import info.bitrich.xchangestream.gemini.GeminiStreamingExchange;
 import info.bitrich.xchangestream.huobi.HuobiStreamingExchange;
 import info.bitrich.xchangestream.kraken.KrakenStreamingExchange;
 import lombok.Getter;
@@ -24,7 +26,9 @@ public class XchangeStreamRegisterConfiguration {
             "Ftx", FtxStreamingExchange.class,
             "Coinbasepro", CoinbaseProStreamingExchange.class,
             "Kraken", KrakenStreamingExchange.class,
-            "Huobi", HuobiStreamingExchange.class
+            "Huobi", HuobiStreamingExchange.class,
+            "Bitstamp", BitstampStreamingExchange.class,
+            "Gemini", GeminiStreamingExchange.class
             );
 
     HashMap<String, XchangeStreamConnectorConfiguration> registeredConnector = new HashMap<>();
@@ -42,6 +46,7 @@ public class XchangeStreamRegisterConfiguration {
             new CurrencyPair("UNI", "USD"),
             new CurrencyPair("FTM", "USD"),
             new CurrencyPair("OAX", "BTC"),
+            new CurrencyPair("SOL", "USD"),
             new CurrencyPair("SAND", "USD"),
             new CurrencyPair("BTC", "USDT"),
             new CurrencyPair("GALA", "USDT"),
@@ -54,6 +59,7 @@ public class XchangeStreamRegisterConfiguration {
             new CurrencyPair("ALGO", "USDT"),
             new CurrencyPair("UNI", "USDT"),
             new CurrencyPair("FTM", "USDT"),
+            new CurrencyPair("SOL", "USDT"),
             new CurrencyPair("SAND", "USDT"));
 
 
