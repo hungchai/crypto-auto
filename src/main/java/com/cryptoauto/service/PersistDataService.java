@@ -23,7 +23,7 @@ public class PersistDataService {
 
 	public Flux<com.cryptoauto.model.Trade> persistTradeData(String provider, Flux<Trade> tradeFlux) {
 		return tradeFlux
-				.onBackpressureBuffer()
+				.onBackpressureBuffer(1048576)
 				.subscribeOn(Schedulers.boundedElastic())
 				.flatMap(xChangetrade -> {
 					com.cryptoauto.model.Trade trade = toTradeModel(xChangetrade, provider);

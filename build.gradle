@@ -73,16 +73,8 @@ jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
 }
 
-def profiles = 'dev'
-
 bootRun {
-  args = ["--spring.profiles.active=" + findProperty('profiles') ?: 'dev']
-  debugOptions {
-        enabled = false
-        port = 50442
-        server = true
-        suspend = true
-    }
+	args = ["--spring.profiles.active=${project.properties['profile'] ?: 'dev'}"]
 }
 
 compileJava.dependsOn(processResources)
