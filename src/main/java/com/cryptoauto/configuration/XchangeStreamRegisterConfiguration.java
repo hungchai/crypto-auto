@@ -8,6 +8,7 @@ import info.bitrich.xchangestream.ftx.FtxStreamingExchange;
 import info.bitrich.xchangestream.gemini.GeminiStreamingExchange;
 import info.bitrich.xchangestream.huobi.HuobiStreamingExchange;
 import info.bitrich.xchangestream.kraken.KrakenStreamingExchange;
+import info.bitrich.xchangestream.okcoin.OkCoinStreamingExchange;
 import lombok.Getter;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,7 @@ public class XchangeStreamRegisterConfiguration {
             "Kraken", KrakenStreamingExchange.class,
             "Huobi", HuobiStreamingExchange.class,
             "Bitstamp", BitstampStreamingExchange.class,
+            "Okcoin", OkCoinStreamingExchange.class,
             "Gemini", GeminiStreamingExchange.class
             );
 
