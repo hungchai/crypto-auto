@@ -1,6 +1,7 @@
 package com.cryptoauto.configuration;
 
 import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
+import info.bitrich.xchangestream.bitfinex.BitfinexStreamingExchange;
 import info.bitrich.xchangestream.bitstamp.v2.BitstampStreamingExchange;
 import info.bitrich.xchangestream.coinbasepro.CoinbaseProStreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchange;
@@ -8,8 +9,8 @@ import info.bitrich.xchangestream.ftx.FtxStreamingExchange;
 import info.bitrich.xchangestream.gemini.GeminiStreamingExchange;
 import info.bitrich.xchangestream.huobi.HuobiStreamingExchange;
 import info.bitrich.xchangestream.kraken.KrakenStreamingExchange;
-import info.bitrich.xchangestream.okcoin.OkCoinStreamingExchange;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Flux;
@@ -21,6 +22,7 @@ import java.util.Set;
 
 @Configuration()
 @Getter
+@Slf4j
 public class XchangeStreamRegisterConfiguration {
     Map<String, Class<? extends StreamingExchange>> streamClassMap = Map.of(
             "Binance", BinanceStreamingExchange.class,
@@ -29,8 +31,8 @@ public class XchangeStreamRegisterConfiguration {
             "Kraken", KrakenStreamingExchange.class,
             "Huobi", HuobiStreamingExchange.class,
             "Bitstamp", BitstampStreamingExchange.class,
-            "Okcoin", OkCoinStreamingExchange.class,
-            "Gemini", GeminiStreamingExchange.class
+            "Gemini", GeminiStreamingExchange.class,
+            "Bitfinex", BitfinexStreamingExchange.class
             );
 
     HashMap<String, XchangeStreamConnectorConfiguration> registeredConnector = new HashMap<>();
@@ -80,5 +82,4 @@ public class XchangeStreamRegisterConfiguration {
                 })
                 .subscribe();
     }
-
 }
