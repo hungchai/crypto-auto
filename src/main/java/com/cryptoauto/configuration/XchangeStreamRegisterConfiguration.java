@@ -31,7 +31,7 @@ public class XchangeStreamRegisterConfiguration {
             "Kraken", KrakenStreamingExchange.class,
             "Huobi", HuobiStreamingExchange.class,
             "Bitstamp", BitstampStreamingExchange.class,
-            "Gemini", GeminiStreamingExchange.class,
+//            "Gemini", GeminiStreamingExchange.class,
             "Bitfinex", BitfinexStreamingExchange.class
             );
 
